@@ -28,8 +28,8 @@ public class LibraryDbContext : DbContext
                     .HasKey(a => a.Id);
 
         authorEntity.HasMany(a => a.Books)
-                    .WithOne()
-                    .HasForeignKey(b => b.Author.Id)
+                    .WithOne(b => b.Author)
+                    .HasForeignKey(b => b.AuthorId)
                     .OnDelete(DeleteBehavior.Restrict);
 
         var bookEntity = modelBuilder.Entity<Book>();
@@ -49,6 +49,14 @@ public class LibraryDbContext : DbContext
         studentEntity.HasMany(s => s.Books)
                      .WithMany(b => b.Students)
                      .UsingEntity(j => j.ToTable("StudentBook"));
+
+        var categoryEntity = modelBuilder.Entity<Category>();
+
+        categoryEntity.ToTable("Categories")
+                      .HasKey(c => c.Id);
+
+        categoryEntity.HasOne(c => c.Book)
+                      .WithMany();
     }
 
     public DbSet<Author> Authors { get; set; }

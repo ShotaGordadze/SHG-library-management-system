@@ -4,11 +4,6 @@ namespace SHG.Infrastructure.Database.Entities;
 
 public class Book : Entity
 {
-    public Book(string title)
-    {
-        Title = title;
-    }
-
     public string Title { get; set; }
 
     public DateTime CreatedDate { get; set; }
@@ -16,6 +11,8 @@ public class Book : Entity
     public DateTime UpdatedDate { get; set; }
 
     public Author Author { get; set; }
+
+    public string AuthorId { get; set; }
 
     public IEnumerable<Category> Categories { get; set; }
 

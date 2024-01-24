@@ -4,14 +4,11 @@ namespace SHG.Infrastructure.Database.Entities;
 
 public class Category : Entity
 {
-    public Category(string name)
-    {
-        Name = name;
-    }
-
     public string Name { get; set; }
 
     public string? Description { get; set; }
+
+    public Book Book { get; set; }
 
     public IEnumerable<Book> Books { get; set; }
 }

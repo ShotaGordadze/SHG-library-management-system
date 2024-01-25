@@ -18,7 +18,6 @@ public static class DIExtensions
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IStudentRepository, StudentRepository>();
 
-
         return services;
     }
 }

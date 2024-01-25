@@ -8,11 +8,11 @@ using System.Runtime.CompilerServices;
 
 namespace SHG.Infrastructure.Repositories;
 
-public interface ICategoryInterface : IRepository<Category>
+public interface ICategoryRepository : IRepository<Category>
 {
 }
 
-public class CategoryRepository : IRepository<Category>
+public class CategoryRepository : ICategoryRepository
 {
     private readonly LibraryDbContext _libraryDbContext;
 

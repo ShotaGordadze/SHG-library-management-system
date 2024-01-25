@@ -3,7 +3,6 @@ using SHG.Infrastructure.Database;
 using SHG.Infrastructure.Database.Entities;
 using SHG.Infrastructure.Repositories.Abstraction;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 
 namespace SHG.Infrastructure.Repositories;
 
@@ -11,7 +10,7 @@ public interface IAuthorRepository : IRepository<Author>
 {
 }
 
-public class AuthorRepository : IRepository<Author>
+public class AuthorRepository : IAuthorRepository
 {
     private readonly LibraryDbContext _libraryDbContext;
 

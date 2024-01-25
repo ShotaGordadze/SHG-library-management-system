@@ -16,47 +16,44 @@ public class LibraryDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql("User ID=sa;Password=123456;Host=localhost;Port=5432;Database=LibraryManagementSystem;Pooling=true;")
+        optionsBuilder.UseNpgsql("User ID=postgres;Password=123456;Host=localhost;Port=5432;Database=LibraryManagementSystem;Pooling=true;")
                       .UseSnakeCaseNamingConvention();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        var authorEntity = modelBuilder.Entity<Author>();
-
-        authorEntity.ToTable("Authors")
-                    .HasKey(a => a.Id);
-
-        authorEntity.HasMany(a => a.Books)
-                    .WithOne(b => b.Author)
-                    .HasForeignKey(b => b.AuthorId)
-                    .OnDelete(DeleteBehavior.Restrict);
+        var authorEntity = modelBuilder.Entity<Author>()
+            .HasMany(e => e.Books)
+            .WithOne(e => e.Author)
+            .HasForeignKey(e => e.AuthorId)
+            .HasPrincipalKey(e => e.Id);
 
         var bookEntity = modelBuilder.Entity<Book>();
 
         bookEntity.ToTable("Books")
-                   .HasKey(b => b.Id);
+                   .HasKey(e => e.Id);
 
-        bookEntity.HasMany(c => c.Categories)
-                   .WithMany(d => d.Books)
+        bookEntity.HasMany(e => e.Categories)
+                   .WithMany(e => e.Books)
                    .UsingEntity(j => j.ToTable("BookCategory"));
 
         var studentEntity = modelBuilder.Entity<Student>();
 
         studentEntity.ToTable("Students")
-                     .HasKey(s => s.Id);
+                     .HasKey(e => e.Id);
 
-        studentEntity.HasMany(s => s.Books)
-                     .WithMany(b => b.Students)
+        studentEntity.HasMany(e => e.Books)
+                     .WithMany(e => e.Students)
                      .UsingEntity(j => j.ToTable("StudentBook"));
 
         var categoryEntity = modelBuilder.Entity<Category>();
 
         categoryEntity.ToTable("Categories")
-                      .HasKey(c => c.Id);
+                      .HasKey(e => e.Id);
 
-        categoryEntity.HasOne(c => c.Book)
-                      .WithMany();
+        categoryEntity.HasMany(e => e.Books)
+                      .WithMany(e => e.Categories)
+                      .UsingEntity(e => e.ToTable("BookCategory"));
     }
 
     public DbSet<Author> Authors { get; set; }

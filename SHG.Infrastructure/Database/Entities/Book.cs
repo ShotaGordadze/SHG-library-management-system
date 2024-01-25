@@ -12,7 +12,7 @@ public class Book : Entity
 
     public Author Author { get; set; }
 
-    public string AuthorId { get; set; }
+    public int AuthorId { get; set; }
 
     public IEnumerable<Category> Categories { get; set; }
 

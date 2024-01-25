@@ -8,7 +8,5 @@ public class Category : Entity
 
     public string? Description { get; set; }
 
-    public Book Book { get; set; }
-
     public IEnumerable<Book> Books { get; set; }
 }

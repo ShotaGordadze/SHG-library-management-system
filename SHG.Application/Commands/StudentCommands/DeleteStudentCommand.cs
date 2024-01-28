@@ -5,7 +5,7 @@ using SHG.Infrastructure.Repositories;
 
 namespace SHG.Application.Commands.StudentCommands;
 
-public record DeleteStudentCommand(int id) : IRequest<int>;
+public record DeleteStudentCommand(int Id) : IRequest<int>;
 
 public class DeleteStudentCommandHandler : IRequestHandler<DeleteStudentCommand, int>
 {
@@ -20,7 +20,7 @@ public class DeleteStudentCommandHandler : IRequestHandler<DeleteStudentCommand,
 
     public async Task<int> Handle(DeleteStudentCommand request, CancellationToken cancellationToken)
     {
-        var student = await _studentRepository.Find(request.id);
+        var student = await _studentRepository.Find(request.Id);
 
         if (student == null)
         {
@@ -30,7 +30,7 @@ public class DeleteStudentCommandHandler : IRequestHandler<DeleteStudentCommand,
         _studentRepository.Delete(student);
         await _unitOfWork.SaveAsync(cancellationToken);
 
-        return request.id;
+        return request.Id;
     }
 }
 

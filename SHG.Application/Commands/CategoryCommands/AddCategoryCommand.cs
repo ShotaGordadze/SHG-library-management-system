@@ -7,7 +7,7 @@ using SHG.Infrastructure.Repositories;
 
 namespace SHG.Application.Commands.CategoryCommands
 {
-    public record AddCategoryCommand(string name, string? description) : IRequest<CategoryDto>;
+    public record AddCategoryCommand(string Name, string? Description) : IRequest<CategoryDto>;
 
     public class AddCategoryCommandHandler : IRequestHandler<AddCategoryCommand, CategoryDto>
     {
@@ -24,8 +24,8 @@ namespace SHG.Application.Commands.CategoryCommands
         {
             var category = new Category
             {
-                Name = request.name,
-                Description = request.description
+                Name = request.Name,
+                Description = request.Description
             };
 
             await _categoryRepository.Store(category);

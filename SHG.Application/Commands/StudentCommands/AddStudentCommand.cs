@@ -7,7 +7,7 @@ using SHG.Infrastructure.Repositories;
 
 namespace SHG.Application.Commands.StudentCommands;
 
-public record AddStudentCommand(string name, string email) : IRequest<StudentDto>;
+public record AddStudentCommand(string Name, string Email) : IRequest<StudentDto>;
 
 public class AddStudentCommandHandler : IRequestHandler<AddStudentCommand, StudentDto>
 {
@@ -24,13 +24,12 @@ public class AddStudentCommandHandler : IRequestHandler<AddStudentCommand, Stude
     {
         var student = new Student
         {
-            Name = request.name,
-            Email = request.email,
+            Name = request.Name,
+            Email = request.Email,
             CreateDate = DateTime.Now,
         };
 
         await _studentRepository.Store(student);
-
         await _unitOfWork.SaveAsync(cancellationToken);
 
         return new StudentDto

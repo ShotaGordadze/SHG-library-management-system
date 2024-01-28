@@ -5,7 +5,7 @@ using SHG.Infrastructure.Repositories;
 
 namespace SHG.Application.Commands.StudentCommands;
 
-public record UpdateStudentNameCommand(int studentId, string studentName) : IRequest<StudentDto>;
+public record UpdateStudentNameCommand(int StudentId, string StudentName) : IRequest<StudentDto>;
 
 public class UpdateStudentNameCommandHandler : IRequestHandler<UpdateStudentNameCommand, StudentDto>
 {
@@ -20,18 +20,20 @@ public class UpdateStudentNameCommandHandler : IRequestHandler<UpdateStudentName
 
     public async Task<StudentDto> Handle(UpdateStudentNameCommand request, CancellationToken cancellationToken)
     {
-        var student = await _studentRepository.Find(request.studentId);
+        var student = await _studentRepository.Find(request.StudentId);
 
         if (student == null)
         {
             throw new ArgumentException(nameof(student));
         }
 
-        student.Name = request.studentName;
+        student.Name = request.StudentName;
+
+        await _unitOfWork.SaveAsync(cancellationToken);
 
         return new StudentDto
         {
-            Name = request.studentName,
+            Name = request.StudentName,
             Email = student.Email
         };
     }

@@ -5,7 +5,7 @@ using SHG.Infrastructure.Repositories;
 
 namespace SHG.Application.Commands.AuthorCommands;
 
-public record DeleteAuthorCommand(int id) : IRequest<int>;
+public record DeleteAuthorCommand(int Id) : IRequest<int>;
 
 public class DeleteAuthorCommandHandler : IRequestHandler<DeleteAuthorCommand, int>
 {
@@ -20,7 +20,7 @@ public class DeleteAuthorCommandHandler : IRequestHandler<DeleteAuthorCommand, i
 
     public async Task<int> Handle(DeleteAuthorCommand request, CancellationToken cancellationToken)
     {
-        var author = await _authorRepository.Find(request.id);
+        var author = await _authorRepository.Find(request.Id);
 
         if (author == null)
         {
@@ -30,7 +30,7 @@ public class DeleteAuthorCommandHandler : IRequestHandler<DeleteAuthorCommand, i
         await _authorRepository.Store(author);
         await _unitOfWork.SaveAsync(cancellationToken);
 
-        return request.id;
+        return request.Id;
     }
 }
 

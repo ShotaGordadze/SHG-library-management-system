@@ -8,7 +8,7 @@ public class Student : Entity
 
     public string Email { get; set; }
 
-    public DateTime Created { get; set; } = DateTime.Now;
+    public DateTime CreateDate { get; set; }
 
     public DateTime Updated { get; set; }
 

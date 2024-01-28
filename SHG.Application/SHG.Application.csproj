@@ -14,8 +14,4 @@
     <ProjectReference Include="..\SHG.Infrastructure\SHG.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Commands\StudentCommands\" />
-  </ItemGroup>
-
 </Project>

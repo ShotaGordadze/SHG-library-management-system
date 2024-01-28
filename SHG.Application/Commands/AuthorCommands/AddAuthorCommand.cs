@@ -39,8 +39,8 @@ public class AddAuthorCommandHandler : IRequestHandler<AddAuthorCommand, AuthorD
         return new AuthorDto
         {
             Id = author.Id,
-            Name = request.name,
-            Lastname = request.lastname
+            Name = request.Name,
+            Lastname = request.Lastname
         };
     }
 }

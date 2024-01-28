@@ -33,8 +33,11 @@ public class AddStudentCommandHandler : IRequestHandler<AddStudentCommand, Stude
 
         await _unitOfWork.SaveAsync(cancellationToken);
 
-
-
+        return new StudentDto
+        {
+            Name = student.Name,
+            Email = student.Email
+        };
     }
 }
 

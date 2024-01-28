@@ -24,7 +24,7 @@ public class UpdateCategoryDescriptionCommandHandler : IRequestHandler<UpdateCat
 
         if (category == null)
         {
-            throw new KeyNotFoundException(nameof(category));
+            throw new ArgumentException(nameof(category));
         }
 
         category.Description = request.description;

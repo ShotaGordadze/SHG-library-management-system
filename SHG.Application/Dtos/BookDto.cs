@@ -1,4 +1,6 @@
-﻿namespace SHG.Application.Dtos;
+﻿using SHG.Infrastructure.Database.Entities;
+
+namespace SHG.Application.Dtos;
 
 public record BookDto
 {
@@ -6,7 +8,7 @@ public record BookDto
 
     public string Title { get; set; }
 
-    public string Author { get; set; }
+    public Author Author { get; set; }
 
     public string Description { get; set; }
 }

@@ -24,7 +24,7 @@ public class UpdateCategoryNameCommandHandler : IRequestHandler<UpdateCategoryNa
 
         if (category == null)
         {
-            throw new KeyNotFoundException(nameof(category));
+            throw new ArgumentException(nameof(category));
         }
 
         category.Name = request.name;

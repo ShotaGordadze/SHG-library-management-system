@@ -10,5 +10,5 @@ public class Author : Entity
 
     public DateTime BirthDate { get; set; }
 
-    public ICollection<Book> Books { get; set; }
+    public ICollection<Book> Books { get; set; } = new List<Book>();
 }

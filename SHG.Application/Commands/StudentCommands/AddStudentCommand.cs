@@ -35,7 +35,7 @@ public class AddStudentCommandHandler : IRequestHandler<AddStudentCommand, Stude
         return new StudentDto
         {
             Name = student.Name,
-            Email = student.Email
+            Email = student.Email,
         };
     }
 }

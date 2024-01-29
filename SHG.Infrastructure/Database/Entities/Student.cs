@@ -8,9 +8,5 @@ public class Student : Entity
 
     public string Email { get; set; }
 
-    public DateTime CreateDate { get; set; }
-
-    public DateTime Updated { get; set; }
-
-    public IEnumerable<Book> Books { get; set; }
+    public IEnumerable<Book> Books { get; set; } = new List<Book>();
 }

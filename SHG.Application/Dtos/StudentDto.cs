@@ -1,4 +1,6 @@
-﻿namespace SHG.Application.Dtos;
+﻿using SHG.Infrastructure.Database.Entities;
+
+namespace SHG.Application.Dtos;
 
 public record StudentDto
 {
@@ -7,4 +9,6 @@ public record StudentDto
     public string Name { get; set; }
 
     public string Email { get; set; }
+
+    public IEnumerable<Book> Books { get; set; } = new List<Book>();
 }

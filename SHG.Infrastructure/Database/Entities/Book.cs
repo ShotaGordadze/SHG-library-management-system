@@ -8,15 +8,11 @@ public class Book : Entity
 
     public string Description { get; set; }
 
-    public DateTime CreateDate { get; set; }
-
-    public DateTime UpdatedDate { get; set; }
-
     public Author Author { get; set; }
 
     public int AuthorId { get; set; }
 
-    public IEnumerable<Category> Categories { get; set; }
+    public IEnumerable<Category> Categories { get; set; } = new List<Category>();
 
-    public IEnumerable<Student> Students { get; set; }
+    public IEnumerable<Student> Students { get; set; } = new List<Student>();
 }

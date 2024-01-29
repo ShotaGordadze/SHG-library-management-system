@@ -10,5 +10,5 @@ public record AuthorDto
 
     public string Lastname { get; set; }
 
-    public IEnumerable<Book> books { get; set; }
+    public IEnumerable<Book> Books { get; set; } = new List<Book>();
 }

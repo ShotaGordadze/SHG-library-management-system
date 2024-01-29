@@ -1,4 +1,6 @@
-﻿namespace SHG.Application.Dtos;
+﻿using SHG.Infrastructure.Database.Entities;
+
+namespace SHG.Application.Dtos;
 
 public record CategoryDto
 {
@@ -7,4 +9,6 @@ public record CategoryDto
     public string Name { get; set; }
 
     public string? Description { get; set; }
+
+    public IEnumerable<Book> books { get; set; } = new List<Book>();
 }

@@ -39,6 +39,7 @@ public class AddBookCommandHandler : IRequestHandler<AddBookCommand, BookDto>
         return new BookDto
         {
             Title = book.Title,
+            Description = book.Description,
             Author = book.Author,
         };
     }

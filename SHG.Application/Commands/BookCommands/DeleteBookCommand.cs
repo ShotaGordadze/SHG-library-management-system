@@ -4,7 +4,7 @@ using SHG.Infrastructure.Repositories;
 
 namespace SHG.Application.Commands.BookCommands;
 
-public record DeleteBookCommand(int Id) : IRequest<int>;
+public record DeleteBookCommand(int BookId) : IRequest<int>;
 
 public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand, int>
 {
@@ -19,7 +19,7 @@ public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand, int>
 
     public async Task<int> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
     {
-        var book = await _bookRepository.Find(request.Id);
+        var book = await _bookRepository.Find(request.BookId);
 
         if (book == null)
         {

@@ -5,7 +5,7 @@ using SHG.Infrastructure.Repositories;
 
 namespace SHG.Application.Commands.CategoryCommands;
 
-public record DeleteCategoryCommand(int Id) : IRequest<int>;
+public record DeleteCategoryCommand(int CategoryId) : IRequest<int>;
 
 public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand, int>
 {
@@ -20,7 +20,7 @@ public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryComman
 
     public async Task<int> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
     {
-        var category = await _categoryRepository.Find(request.Id);
+        var category = await _categoryRepository.Find(request.CategoryId);
 
         if (category == null)
         {
@@ -31,7 +31,7 @@ public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryComman
 
         await _unitOfWork.SaveAsync(cancellationToken);
 
-        return request.Id;
+        return 0;
     }
 }
 

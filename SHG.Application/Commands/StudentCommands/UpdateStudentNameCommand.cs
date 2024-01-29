@@ -34,7 +34,8 @@ public class UpdateStudentNameCommandHandler : IRequestHandler<UpdateStudentName
         return new StudentDto
         {
             Name = request.StudentName,
-            Email = student.Email
+            Email = student.Email,
+            Books = student.Books,
         };
     }
 }

@@ -8,7 +8,7 @@ using SHG.Infrastructure.Repositories;
 namespace SHG.Application.Commands.AuthorCommands;
 
 //Add Birthdate
-public record AddAuthorCommand(string Name, string Lastname) : IRequest<AuthorDto>;
+public record AddAuthorCommand(string AuthorName, string AuthorLastname) : IRequest<AuthorDto>;
 
 public class AddAuthorCommandHandler : IRequestHandler<AddAuthorCommand, AuthorDto>
 {
@@ -25,8 +25,8 @@ public class AddAuthorCommandHandler : IRequestHandler<AddAuthorCommand, AuthorD
     {
         var author = new Author
         {
-            Name = request.Name,
-            Lastname = request.Lastname
+            Name = request.AuthorName,
+            Lastname = request.AuthorLastname
         };
 
         await _authorRepository.Store(author);
@@ -34,13 +34,14 @@ public class AddAuthorCommandHandler : IRequestHandler<AddAuthorCommand, AuthorD
         await _unitOfWork.SaveAsync(cancellationToken);
 
         author = await _authorRepository.Query(x => x.Id == author.Id)
+                                        .Include(x => x.Books)
                                         .FirstAsync(cancellationToken);
 
         return new AuthorDto
         {
             Id = author.Id,
-            Name = request.Name,
-            Lastname = request.Lastname
+            Name = request.AuthorName,
+            Lastname = request.AuthorLastname
         };
     }
 }

@@ -7,7 +7,7 @@ using SHG.Infrastructure.Repositories;
 
 namespace SHG.Application.Commands.BookCommands;
 
-public record UpdateBookTitleCommand(int Id, string Title) : IRequest<BookDto>;
+public record UpdateBookTitleCommand(int BookId, string Title) : IRequest<BookDto>;
 
 public class UpdateBookTitleCommandHandler : IRequestHandler<UpdateBookTitleCommand, BookDto>
 {
@@ -22,7 +22,7 @@ public class UpdateBookTitleCommandHandler : IRequestHandler<UpdateBookTitleComm
 
     public async Task<BookDto> Handle(UpdateBookTitleCommand request, CancellationToken cancellationToken)
     {
-        var book = await _bookRepository.Find(request.Id);
+        var book = await _bookRepository.Find(request.BookId);
 
         if (book == null)
         {
@@ -33,9 +33,9 @@ public class UpdateBookTitleCommandHandler : IRequestHandler<UpdateBookTitleComm
 
         await _unitOfWork.SaveAsync(cancellationToken);
 
-        book = await _bookRepository.Query(x => x.Id == request.Id)
-                              .Include(x => x.Author)
-                              .FirstAsync(cancellationToken);
+        book = await _bookRepository.Query(x => x.Id == request.BookId)
+                                    .Include(x => x.Author)
+                                    .FirstAsync(cancellationToken);
 
         return new BookDto
         {

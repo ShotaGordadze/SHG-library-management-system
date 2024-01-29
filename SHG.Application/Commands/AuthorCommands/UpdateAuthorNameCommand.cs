@@ -5,7 +5,7 @@ using SHG.Infrastructure.Repositories;
 
 namespace SHG.Application.Commands.AuthorCommands;
 
-public record UpdateAuthorNameCommand(int Id, string Name) : IRequest<AuthorDto>;
+public record UpdateAuthorNameCommand(int AuthorId, string AuthorName) : IRequest<AuthorDto>;
 
 public class UpdateAuthorNameCommandHandler : IRequestHandler<UpdateAuthorNameCommand, AuthorDto>
 {
@@ -20,21 +20,21 @@ public class UpdateAuthorNameCommandHandler : IRequestHandler<UpdateAuthorNameCo
 
     public async Task<AuthorDto> Handle(UpdateAuthorNameCommand request, CancellationToken cancellationToken)
     {
-        var author = await _authorRepository.Find(request.Id);
+        var author = await _authorRepository.Find(request.AuthorId);
 
         if (author == null)
         {
             throw new ArgumentException(nameof(author));
         }
 
-        author.Name = request.Name;
+        author.Name = request.AuthorName;
 
         await _unitOfWork.SaveAsync(cancellationToken);
 
         return new AuthorDto
         {
             Id = author.Id,
-            Name = request.Name,
+            Name = author.Name,
             Lastname = author.Lastname,
         };
     }

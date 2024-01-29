@@ -5,7 +5,7 @@ using SHG.Infrastructure.Repositories;
 
 namespace SHG.Application.Commands.CategoryCommands;
 
-public record UpdateCategoryDescriptionCommand(int Id, string Description) : IRequest<CategoryDto>;
+public record UpdateCategoryDescriptionCommand(int CategoryId, string Description) : IRequest<CategoryDto>;
 
 public class UpdateCategoryDescriptionCommandHandler : IRequestHandler<UpdateCategoryDescriptionCommand, CategoryDto>
 {
@@ -20,7 +20,7 @@ public class UpdateCategoryDescriptionCommandHandler : IRequestHandler<UpdateCat
 
     public async Task<CategoryDto> Handle(UpdateCategoryDescriptionCommand request, CancellationToken cancellationToken)
     {
-        var category = await _categoryRepository.Find(request.Id);
+        var category = await _categoryRepository.Find(request.CategoryId);
 
         if (category == null)
         {

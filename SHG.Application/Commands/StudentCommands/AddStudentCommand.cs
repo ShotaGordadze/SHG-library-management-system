@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using MediatR.Wrappers;
+using Microsoft.EntityFrameworkCore;
 using SHG.Application.Dtos;
 using SHG.Infrastructure;
 using SHG.Infrastructure.Database.Entities;
@@ -32,10 +33,15 @@ public class AddStudentCommandHandler : IRequestHandler<AddStudentCommand, Stude
         await _studentRepository.Store(student);
         await _unitOfWork.SaveAsync(cancellationToken);
 
+        student = await _studentRepository.Query(x => x.Id == student.Id)
+                                          .Include(x => x.Books)
+                                          .FirstAsync();
+
         return new StudentDto
         {
             Name = student.Name,
             Email = student.Email,
+            Books = student.Books
         };
     }
 }

@@ -41,7 +41,8 @@ public class AddAuthorCommandHandler : IRequestHandler<AddAuthorCommand, AuthorD
         {
             Id = author.Id,
             Name = request.AuthorName,
-            Lastname = request.AuthorLastname
+            Lastname = request.AuthorLastname,
+            Books = author.Books
         };
     }
 }

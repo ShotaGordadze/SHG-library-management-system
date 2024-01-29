@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
-namespace SHG.Application.Commands.StudentCommands
+namespace SHG.Application.Commands.StudentCommands;
+
+public record IssueBookCommand(int BookID, DateTime Start, DateTime End) : IRequest<bool>;
+
+public class IssueBookCommandHandler : IRequestHandler<IssueBookCommand, bool>
 {
-    internal class IssueBookCommand
+    public Task<bool> Handle(IssueBookCommand request, CancellationToken cancellationToken)
     {
+        throw new NotImplementedException();
     }
 }

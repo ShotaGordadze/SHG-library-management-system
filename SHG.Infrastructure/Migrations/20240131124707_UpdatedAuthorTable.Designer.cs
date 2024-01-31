@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SHG.Infrastructure.Database;
@@ -11,9 +12,11 @@ using SHG.Infrastructure.Database;
 namespace SHG.Infrastructure.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    partial class LibraryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240131124707_UpdatedAuthorTable")]
+    partial class UpdatedAuthorTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

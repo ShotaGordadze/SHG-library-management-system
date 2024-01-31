@@ -8,7 +8,7 @@ public record StudentDto
 
     public string Name { get; set; }
 
-    public string Email { get; set; }
+    public string? Email { get; set; }
 
     public IEnumerable<Book> Books { get; set; } = new List<Book>();
 }

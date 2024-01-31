@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using MediatR.Wrappers;
 using Microsoft.EntityFrameworkCore;
 using SHG.Application.Dtos;
 using SHG.Infrastructure;
@@ -27,7 +26,7 @@ public class AddStudentCommandHandler : IRequestHandler<AddStudentCommand, Stude
         {
             Name = request.Name,
             Email = request.Email,
-            CreateDate = DateTime.Now,
+            CreateDate = DateTime.Now.ToUniversalTime(),
         };
 
         await _studentRepository.Store(student);

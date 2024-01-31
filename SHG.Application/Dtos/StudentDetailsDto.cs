@@ -10,7 +10,7 @@ public class StudentDetailsDto
 
     public DateTime CreateDate { get; set; }
 
-    public DateTime LastChangeDate { get; set; }
+    public DateTime? LastChangeDate { get; set; }
 
     public IEnumerable<Book> Books { get; set; } = new List<Book>();
 }

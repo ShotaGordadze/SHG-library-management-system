@@ -1,8 +1,9 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SHG.Api.Models;
 using SHG.Application.Commands.StudentCommands;
+using SHG.Application.Queries;
+using SHG.Application.Queries.StudentQueries;
 
 namespace SHG.Api.Controllers;
 
@@ -20,13 +21,29 @@ public class StudentsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddAsync([FromBody] StudentModel model)
     {
-        var student = await _mediator.Send(new AddStudentCommand(model.Name, model.Email));
+        var result = await _mediator.Send(new AddStudentCommand(model.Name, model.Email));
 
-        return Ok(student);
+        return Ok(result);
     }
 
-    [HttpPut("{id:int}")]
-    public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromBody] StudentModel model)
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetAsync([FromRoute] int id)
+    {
+        var result = await _mediator.Send(new GetStudentQuery(id));
+
+        return Ok(result);
+    } 
+    //sus
+    [HttpGet("{id:int}/details")]
+    public async Task<IActionResult> GetDetailsAsync([FromRoute] int id)
+    {
+        var result = await _mediator.Send(new GetStudentDetailsQuery(id));
+
+        return Ok(result);
+    }
+
+    [HttpPut("{id:int}/name")]
+    public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromBody] StudentUpdateNameModel model)
     {
         var result = await _mediator.Send(new UpdateStudentNameCommand(id, model.Name));
 

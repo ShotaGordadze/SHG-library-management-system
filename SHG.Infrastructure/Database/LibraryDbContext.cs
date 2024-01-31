@@ -22,11 +22,13 @@ public class LibraryDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        var authorEntity = modelBuilder.Entity<Author>()
-            .HasMany(e => e.Books)
-            .WithOne(e => e.Author)
-            .HasForeignKey(e => e.AuthorId)
-            .HasPrincipalKey(e => e.Id);
+        var authorEntity = modelBuilder.Entity<Author>();
+
+        authorEntity.ToTable("Authors")
+                    .HasKey(x => x.Id);
+
+        authorEntity.HasMany(e => e.Books)
+                    .WithOne(e => e.Author);
 
         var bookEntity = modelBuilder.Entity<Book>();
 

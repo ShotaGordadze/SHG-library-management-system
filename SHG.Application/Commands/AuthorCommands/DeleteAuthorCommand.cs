@@ -27,10 +27,10 @@ public class DeleteAuthorCommandHandler : IRequestHandler<DeleteAuthorCommand, i
             return -1;
         }
 
-        await _authorRepository.Store(author);
+         _authorRepository.Delete(author);
         await _unitOfWork.SaveAsync(cancellationToken);
 
-        return request.AuthorId;
+        return 0;
     }
 }
 

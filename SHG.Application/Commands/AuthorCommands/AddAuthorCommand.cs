@@ -26,7 +26,8 @@ public class AddAuthorCommandHandler : IRequestHandler<AddAuthorCommand, AuthorD
         var author = new Author
         {
             Name = request.AuthorName,
-            Lastname = request.AuthorLastname
+            Lastname = request.AuthorLastname,
+            CreateDate = DateTime.Now.ToUniversalTime(),
         };
 
         await _authorRepository.Store(author);

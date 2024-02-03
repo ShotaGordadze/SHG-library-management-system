@@ -7,11 +7,11 @@ namespace SHG.Application.Queries.StudentQueries;
 
 public record GetStudentQuery(int Id) : IRequest<StudentDto>;
 
-public class FindStudentQueryHandler : IRequestHandler<GetStudentQuery, StudentDto>
+public class GetStudentQueryHandler : IRequestHandler<GetStudentQuery, StudentDto>
 {
     private readonly IStudentRepository _studentRepository;
 
-    public FindStudentQueryHandler(IStudentRepository studentRepository)
+    public GetStudentQueryHandler(IStudentRepository studentRepository)
     {
         _studentRepository = studentRepository;
     }

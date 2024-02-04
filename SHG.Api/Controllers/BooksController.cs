@@ -6,4 +6,8 @@ namespace SHG.Api.Controllers;
 [Route("[Controller]")]
 public class BooksController
 {
+    public async Task<IActionResult> AddAsync()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -14,12 +14,6 @@ public class LibraryDbContext : DbContext
     {
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseNpgsql("User ID=postgres;Password=123456;Host=localhost;Port=5432;Database=LibraryManagementSystem;Pooling=true;")
-                      .UseSnakeCaseNamingConvention();
-    }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         var authorEntity = modelBuilder.Entity<Author>();
@@ -33,11 +27,11 @@ public class LibraryDbContext : DbContext
         var bookEntity = modelBuilder.Entity<Book>();
 
         bookEntity.ToTable("Books")
-                   .HasKey(e => e.Id);
+                  .HasKey(e => e.Id);
 
         bookEntity.HasMany(e => e.Categories)
-                   .WithMany(e => e.Books)
-                   .UsingEntity(j => j.ToTable("BookCategory"));
+                  .WithMany(e => e.Books)
+                  .UsingEntity(j => j.ToTable("BookCategory"));
 
         var studentEntity = modelBuilder.Entity<Student>();
 

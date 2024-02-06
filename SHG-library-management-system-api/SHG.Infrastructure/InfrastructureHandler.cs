@@ -5,7 +5,7 @@ namespace SHG.Infrastructure;
 
 public static class InfrastructureHandler
 {
-    public async static Task InitDbContext(LibraryDbContext dbContext, IServiceProvider serviceProvider)
+    public static async Task InitDbContext(LibraryDbContext dbContext, IServiceProvider serviceProvider)
     {
         if ((await dbContext.Database.GetPendingMigrationsAsync()).Any())
         {

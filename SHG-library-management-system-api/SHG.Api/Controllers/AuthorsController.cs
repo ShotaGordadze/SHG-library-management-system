@@ -1,11 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SHG.Api.Models;
 using SHG.Application.Commands.AuthorCommands;
 using SHG.Application.Queries.AuthorQueries;
 
 namespace SHG.Api.Controllers;
-
+[Authorize]
 [ApiController]
 [Route("[Controller]")]
 public class AuthorsController : ControllerBase

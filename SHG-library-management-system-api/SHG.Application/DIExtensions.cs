@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
+
 namespace SHG.Application;
 
 public static class DIExtensions

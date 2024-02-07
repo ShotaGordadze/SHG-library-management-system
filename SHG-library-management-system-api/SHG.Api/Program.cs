@@ -20,6 +20,9 @@ builder.Services.AddApplication();
 
 var app = builder.Build();
 
+app.MapGet("/security/getMessage",
+() => "Hello World!").RequireAuthorization();
+
 await using var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateAsyncScope();
 await InfrastructureHandler.InitDbContext(scope.ServiceProvider.GetRequiredService<LibraryDbContext>(), scope.ServiceProvider);
 

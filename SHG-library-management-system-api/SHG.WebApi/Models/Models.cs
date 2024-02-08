@@ -15,3 +15,5 @@ public record StudentUpdateLastnameModel(string Lastname);
 public record BookModel(string Name, string Email);
 
 public record CategoryModel(string Name, string? Description);
+
+public record UserModel(string Email, string Password);

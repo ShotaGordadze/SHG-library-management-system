@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SHG.Infrastructure.Database.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace SHG.Infrastructure.Database;
 
-public class LibraryDbContext : DbContext
+public class LibraryDbContext : IdentityDbContext<User,Role,Guid>
 {
     public LibraryDbContext()
     {
@@ -23,6 +25,16 @@ public class LibraryDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<User>().ToTable("Users", "identity");
+        modelBuilder.Entity<Role>().ToTable("Roles", "identity");
+        modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("UserRoles", "identity");
+        modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("UserClaims", "identity");
+        modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("UserLogins", "identity");
+        modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("RoleClaims", "identity");
+        modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("UserTokens", "identity");
+
         var authorEntity = modelBuilder.Entity<Author>();
 
         authorEntity.ToTable("Authors")

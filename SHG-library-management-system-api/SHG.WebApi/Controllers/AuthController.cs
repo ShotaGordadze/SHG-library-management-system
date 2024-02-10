@@ -6,7 +6,6 @@ using SHG.WebApi.Models;
 
 namespace SHG.WebApi.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("[Controller]")]
 public class AuthController : ControllerBase
@@ -18,9 +17,8 @@ public class AuthController : ControllerBase
         _mediator = mediator;
     }
 
-    [AllowAnonymous]
-    [HttpPost]
-    public async Task<IActionResult> SignUpAsync(UserModel model)
+    [HttpPost("Sign Up")]
+    public async Task<IActionResult> SignUpAsync(SignUpModel model)
     {
         var cmd = new SignUpCommand(model.Email, model.Password);
 
@@ -31,5 +29,18 @@ public class AuthController : ControllerBase
         }
 
         return BadRequest("Couldn't create an user");
+    }
+
+    [HttpPost("Sign in")]
+    public async Task<IActionResult> SignInAsync(SignInModel model)
+    {
+        var userToken = await _mediator.Send(new SignInCommand(model.Email, model.Password));
+
+        if (userToken is null)
+        {
+            return BadRequest();
+        }
+
+        return Ok(userToken);
     }
 }

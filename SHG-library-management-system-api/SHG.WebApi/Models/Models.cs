@@ -16,6 +16,8 @@ public record BookModel(string Name, string Email);
 
 public record CategoryModel(string Name, string? Description);
 
-public record UserModel(string Email, string Password);
+public record SignUpModel(string Email, string Password);
+
+public record SignInModel(string Email, string Password);
 
 public record RoleModel(string Name);

@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SHG.Application.Commands.IdentityCommands;
+using SHG.WebApi.Identity;
 using SHG.WebApi.Models;
 
 namespace SHG.WebApi.Controllers
@@ -16,6 +18,7 @@ namespace SHG.WebApi.Controllers
             _mediator = mediator;
         }
 
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
         [HttpPost]
         public async Task<IActionResult> AddAsync(RoleModel model)
         {

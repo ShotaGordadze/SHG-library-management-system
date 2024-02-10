@@ -1,6 +1,8 @@
-﻿namespace SHG.WebApi.Identity
+﻿namespace SHG.WebApi.Identity;
+
+public class IdentityData
 {
-    public class IdentityData
-    {
-    }
+    public const string AdminUserClaimName = "admin";
+
+    public const string AdminUserPolicyName = "Admin";
 }

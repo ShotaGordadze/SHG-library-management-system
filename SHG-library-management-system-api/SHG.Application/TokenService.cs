@@ -36,7 +36,7 @@ public class TokenService
         var userClaims = await _userManager.GetClaimsAsync(user);
         claims.AddRange(userClaims);
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]!));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         var expires = DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["Jwt:AccessTokenExpirationMinutes"]));
 
@@ -53,6 +53,6 @@ public class TokenService
         var token = tokenHandler.CreateToken(tokenDescriptor);
 
         return new AccessTokenDto(tokenDescriptor.Issuer, tokenDescriptor.Audience,
-                                  Convert.ToDouble(tokenDescriptor.Expires) * 60, tokenHandler.WriteToken(token));
+                                  Convert.ToDouble(_configuration["JwtSettings:AccessTokenExpirationMinutes"]) * 60, tokenHandler.WriteToken(token));
     }
 }

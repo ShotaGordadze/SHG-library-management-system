@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using SHG.Infrastructure.Database.Entities;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace SHG.Application;
 
@@ -17,8 +21,38 @@ public class TokenService
         _userManager = userManager;
     }
 
-    public async Task<AccessTokenDto> GenereteJwtToken(User user)
+    public async Task<AccessTokenDto> GenerateJwtToken(User user)
     {
+        var roles = await _userManager.GetRolesAsync(user);
 
+        var claims = new List<Claim>
+                     {
+                         new(JwtRegisteredClaimNames.Sub, user.UserName!),
+                         new(JwtRegisteredClaimNames.Jti, user.Id.ToString()),
+                     };
+
+        claims.AddRange(roles.Select(x => new Claim(ClaimTypes.Role, x)));
+
+        var userClaims = await _userManager.GetClaimsAsync(user);
+        claims.AddRange(userClaims);
+
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]!));
+        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var expires = DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["Jwt:AccessTokenExpirationMinutes"]));
+
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(claims),
+            Expires = expires,
+            SigningCredentials = credentials,
+            Issuer = _configuration["Jwt:Issuer"],
+            Audience = _configuration["Jwt:Audience"]
+        };
+
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+
+        return new AccessTokenDto(tokenDescriptor.Issuer, tokenDescriptor.Audience,
+                                  Convert.ToDouble(tokenDescriptor.Expires) * 60, tokenHandler.WriteToken(token));
     }
 }

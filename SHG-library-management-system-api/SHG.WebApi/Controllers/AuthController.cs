@@ -1,11 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Build.Framework;
+using SHG.Application.Commands.AuthCommands;
 using SHG.WebApi.Models;
 
 namespace SHG.WebApi.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[Controller]")]
 public class AuthController : ControllerBase
@@ -16,10 +17,19 @@ public class AuthController : ControllerBase
     {
         _mediator = mediator;
     }
+
     [AllowAnonymous]
     [HttpPost]
-    public async Task<IActionResult> CreateTokenAsync(UserModel model)
+    public async Task<IActionResult> SignUpAsync(UserModel model)
     {
+        var cmd = new SignUpCommand(model.Email, model.Password);
 
+        var user = await _mediator.Send(cmd);
+        if (user != null)
+        {
+            return Ok(user);
+        }
+
+        return BadRequest("Couldn't create an user");
     }
 }

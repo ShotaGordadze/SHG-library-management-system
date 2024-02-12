@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SHG.Api.Models;
+using SHG.WebApi.Models;
 using SHG.Application.Commands.StudentCommands;
 using SHG.Application.Queries;
 using SHG.Application.Queries.StudentQueries;
@@ -32,7 +32,7 @@ public class StudentsController : ControllerBase
         var result = await _mediator.Send(new GetStudentQuery(id));
 
         return Ok(result);
-    } 
+    }
     //sus
     [HttpGet("{id:int}/details")]
     public async Task<IActionResult> GetDetailsAsync([FromRoute] int id)

@@ -27,6 +27,7 @@ public class AddAuthorCommandHandler : IRequestHandler<AddAuthorCommand, AuthorD
         {
             Name = request.AuthorName,
             Lastname = request.AuthorLastname,
+            BirthDate = DateTime.Now.ToUniversalTime(),
             CreateDate = DateTime.Now.ToUniversalTime(),
         };
 

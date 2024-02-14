@@ -18,7 +18,7 @@ namespace SHG.WebApi.Controllers
             _mediator = mediator;
         }
 
-        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> AddAsync(RoleModel model)
         {

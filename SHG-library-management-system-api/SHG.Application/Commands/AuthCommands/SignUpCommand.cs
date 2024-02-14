@@ -9,12 +9,10 @@ public record SignUpCommand(string Email, string Password) : IRequest<User?>;
 
 public class SignUpCommandHandler : IRequestHandler<SignUpCommand, User?>
 {
-    private readonly IUnitOfWork _unitOfWork;
     private readonly UserManager<User> _userManager;
 
-    public SignUpCommandHandler(IUnitOfWork unitOfWork, UserManager<User> userManager)
+    public SignUpCommandHandler(UserManager<User> userManager)
     {
-        _unitOfWork = unitOfWork;
         _userManager = userManager;
     }
 

@@ -46,7 +46,7 @@ public class TokenService
             Expires = expires,
             SigningCredentials = credentials,
             Issuer = _configuration["Jwt:Issuer"],
-            Audience = _configuration["Jwt:Audience"]
+            Audience = _configuration["Jwt:Audience"],
         };
 
         var tokenHandler = new JwtSecurityTokenHandler();

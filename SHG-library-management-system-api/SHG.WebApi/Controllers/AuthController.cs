@@ -17,7 +17,7 @@ public class AuthController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost("Sign Up")]
+    [HttpPost("SignUp")]
     public async Task<IActionResult> SignUpAsync(SignUpModel model)
     {
         var cmd = new SignUpCommand(model.Email, model.Password);
@@ -31,7 +31,7 @@ public class AuthController : ControllerBase
         return BadRequest("Couldn't create an user");
     }
 
-    [HttpPost("Sign in")]
+    [HttpPost("SignIn")]
     public async Task<IActionResult> SignInAsync(SignInModel model)
     {
         var userToken = await _mediator.Send(new SignInCommand(model.Email, model.Password));

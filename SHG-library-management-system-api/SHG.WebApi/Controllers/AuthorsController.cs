@@ -1,11 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SHG.Api.Models;
+using SHG.WebApi.Models;
 using SHG.Application.Commands.AuthorCommands;
 using SHG.Application.Queries.AuthorQueries;
 
 namespace SHG.Api.Controllers;
-
+[Authorize]
 [ApiController]
 [Route("[Controller]")]
 public class AuthorsController : ControllerBase
@@ -25,6 +26,7 @@ public class AuthorsController : ControllerBase
         return Ok(result);
     }
     //Add AuthorDetails request
+    [AllowAnonymous]
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetAsync([FromRoute] int id)
     {

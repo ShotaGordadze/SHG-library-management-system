@@ -5,9 +5,9 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SHG.Infrastructure", "SHG.Infrastructure\SHG.Infrastructure.csproj", "{0A1C27DF-3096-4D0F-B3E8-F4E862AEF4F6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SHG.Api", "SHG.Api\SHG.Api.csproj", "{FE4A1485-2E5B-4BFE-828E-F687C65A93F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SHG.Application", "SHG.Application\SHG.Application.csproj", "{930F0CD9-9A13-4C6A-A25C-82D8774BC383}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SHG.Application", "SHG.Application\SHG.Application.csproj", "{930F0CD9-9A13-4C6A-A25C-82D8774BC383}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SHG.WebApi", "SHG.WebApi\SHG.WebApi.csproj", "{7172773F-4257-4836-B812-E74794D5A17C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		{0A1C27DF-3096-4D0F-B3E8-F4E862AEF4F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A1C27DF-3096-4D0F-B3E8-F4E862AEF4F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A1C27DF-3096-4D0F-B3E8-F4E862AEF4F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FE4A1485-2E5B-4BFE-828E-F687C65A93F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FE4A1485-2E5B-4BFE-828E-F687C65A93F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FE4A1485-2E5B-4BFE-828E-F687C65A93F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FE4A1485-2E5B-4BFE-828E-F687C65A93F6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{930F0CD9-9A13-4C6A-A25C-82D8774BC383}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{930F0CD9-9A13-4C6A-A25C-82D8774BC383}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{930F0CD9-9A13-4C6A-A25C-82D8774BC383}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{930F0CD9-9A13-4C6A-A25C-82D8774BC383}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7172773F-4257-4836-B812-E74794D5A17C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7172773F-4257-4836-B812-E74794D5A17C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7172773F-4257-4836-B812-E74794D5A17C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7172773F-4257-4836-B812-E74794D5A17C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

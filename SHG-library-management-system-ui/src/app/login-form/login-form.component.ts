@@ -3,6 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { EndpointService } from '../endpoint.service';
+import jwt_decode, { jwtDecode } from "jwt-decode";
+
 
 @Component({
   selector: 'app-login-form',
@@ -12,7 +15,7 @@ import { Router } from '@angular/router';
 
 export class LoginFormComponent {
   
-  constructor(private router: Router) {}
+  constructor(private router: Router, private endpointService : EndpointService) {}
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -24,7 +27,20 @@ export class LoginFormComponent {
       console.log("invalid")
     } else {
       const { email, password } = this.loginForm.value;
-      console.log(email, password);
+      const login = {email, password}
+      const jsonString = JSON.stringify(login);
+      this.endpointService.signIn(jsonString).subscribe(
+        response => {
+          const token = response.token;
+          const decodedToken = jwtDecode(token);
+          const tokenJson = JSON.stringify(decodedToken);
+          const newToken = JSON.parse(tokenJson);
+          console.log(newToken.role);
+        },
+        error => {
+          console.log(error);
+        }
+      );
     }
   }
 

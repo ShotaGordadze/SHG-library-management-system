@@ -16,6 +16,7 @@ import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.co
 import { EndpointService } from './endpoint.service';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
     AppComponent,

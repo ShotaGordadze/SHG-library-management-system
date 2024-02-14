@@ -35,7 +35,7 @@ public class SignUpCommandHandler : IRequestHandler<SignUpCommand, User?>
         }
 
         var idpUser = await _userManager.FindByEmailAsync(request.Email);
-        if (idpUser != null) await _userManager.AddToRoleAsync(idpUser, "Client");
+        if (idpUser != null) await _userManager.AddToRoleAsync(idpUser, "Admin");
 
         return idpUser;
     }

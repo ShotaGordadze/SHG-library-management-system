@@ -1,0 +1,24 @@
+.card-container{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    /* border: 1px solid grey; */
+    font-size: 12px;
+    width: 260px;
+}
+
+
+img{
+    width: 70px;
+    height: auto;
+}
+
+.grey-font{
+    color: grey;
+}
+
+.red-font{
+    color: red;
+}
+
+

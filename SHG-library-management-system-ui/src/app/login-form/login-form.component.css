@@ -1,0 +1,100 @@
+.login-container {
+    margin-left: 20px;
+
+    width: 500px;
+    height: 325px;
+    border: 1px solid rgba(46, 167, 211, 0.138);
+    border-radius: 3px;
+}
+
+.header {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 15px;
+    background-color: rgba(46, 167, 211, 0.384);
+    color: rgba(55, 55, 167, 0.673);
+    font-weight: bold;
+}
+
+
+.email-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.password-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+form {
+    margin-top: 20px;
+    margin-left: 18px;
+}
+
+input {
+    width: 450px;
+    height: 25px;
+    border-color: rgba(46, 167, 211, 0.138);
+    padding-left: 10px;
+
+}
+
+/* input:focus {
+  border-color: rgba(46, 167, 211, 0.37) !important;
+} */
+
+label {
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: small;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button {
+    font-weight: bold;
+    height: 40px;
+    width: 70px;
+    background-color: rgb(46, 167, 211);
+    border: 0px;
+    color: white;
+
+}
+
+.login-register {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.forgot-password {
+    margin-top: 10px;
+    font-size: small;
+    color: rgb(46, 167, 211);
+    cursor: pointer;
+}
+
+.not-registered {
+    font-size: small;
+    color: rgb(46, 167, 211);
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.error {
+    color: red;
+    font-size: small;
+
+} 
+
+.error-container {
+    width: 460px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

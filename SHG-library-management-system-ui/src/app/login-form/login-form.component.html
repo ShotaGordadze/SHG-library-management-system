@@ -1,0 +1,35 @@
+<div class="login-container">
+    <div class="header">LOGIN FORM</div>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+        <div class="email-container">
+            <div class="error-container">
+                <label>Email</label>
+                <div *ngIf="email?.touched && email?.invalid" class="error">*Please enter valid email</div>
+            </div>
+          
+            <input type="email" formControlName="email" placeholder="Enter email">
+        </div>
+        
+
+        <div class="password-container">
+            <div class="error-container">
+                <label>Password</label>
+                <div *ngIf="password?.touched && password?.invalid" class="error">*Password should at least have 8
+                    characters</div>
+            </div>
+
+            <input type="password" formControlName="password" placeholder="Enter password">
+        </div>
+
+
+        <div class="forgot-password" onclick="">Forgot Password</div>
+
+
+        <div class="login-register">
+            <button type="submit">LOGIN</button>
+            <div class="not-registered" (click)="navigateToRoute()">| Not Registered Yet</div>
+        </div>
+
+    </form>
+</div>

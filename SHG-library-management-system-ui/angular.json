@@ -3,9 +3,19 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "library-management-system": {
+    "online-library": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -13,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/library-management-system",
+            "outputPath": "dist/online-library",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -62,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "library-management-system:build:production"
+              "buildTarget": "online-library:build:production"
             },
             "development": {
-              "buildTarget": "library-management-system:build:development"
+              "buildTarget": "online-library:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "library-management-system:build"
+            "buildTarget": "online-library:build"
           }
         },
         "test": {
@@ -98,6 +108,6 @@
     }
   },
   "cli": {
-    "analytics": "1fdea34e-4732-41b6-bc23-477eca46dacd"
+    "analytics": false
   }
 }

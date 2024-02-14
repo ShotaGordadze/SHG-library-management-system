@@ -21,12 +21,12 @@ img{
 }
 
 .labels{
-    width: 500px;
+    width: 350px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-left: 800px;
+    margin-left: 950px;
     padding-top: 20px;
     padding-bottom: 20px;
 

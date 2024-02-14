@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormsModule, FormControl, FormGroup } from '@angular/forms';
+import { EndpointService } from '../endpoint.service';
 
 @Component({
   selector: 'app-register',
@@ -8,6 +9,10 @@ import { FormsModule, FormControl, FormGroup } from '@angular/forms';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+  constructor(private endpointService: EndpointService){
+
+  }
+
   registerForm = new FormGroup({
     name : new FormControl('', [Validators.required]),
     lastname : new FormControl('', [Validators.required]),
@@ -44,8 +49,18 @@ export class RegisterComponent {
     if(this.registerForm.invalid || !this.passwordsMatch){
       console.log("invalid")
     }else{
-      const {name, lastname, email, password} = this.registerForm.value;
-      console.log(name, lastname, email, password);
+      const {email, password} = this.registerForm.value;
+      const jsonObject = { email, password };
+      const jsonString = JSON.stringify(jsonObject);
+      this.endpointService.signUp(jsonString).subscribe(
+        response => {
+          console.log('Response from signUp:', response);
+        },
+        error => {
+          console.error('Error from signUp:', error);
+          // Handle error if needed
+        }
+      );
     }
   }
 }

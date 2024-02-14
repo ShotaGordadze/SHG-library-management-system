@@ -22,9 +22,15 @@ export class EndpointService {
     // Specify the API endpoint URL
     const apiUrl = `https://localhost:7093/Auth/SignUp`;
 
-    console.log("body");
-
     // Make a POST request to the API endpoint with the JSON string in the request body and headers
+    return this.http.post(apiUrl, body, { headers: headers });
+  }
+
+  signIn(jsonString : string) : Observable<any>{
+    const body =  jsonString;
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const apiUrl = `https://localhost:7093/Auth/SignIn`;
+
     return this.http.post(apiUrl, body, { headers: headers });
   }
 }

@@ -9,11 +9,11 @@ namespace SHG.WebApi.Controllers
 {
     [ApiController]
     [Route("Controller/Role")]
-    public class AddRoleController : ControllerBase
+    public class RolesController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public AddRoleController(IMediator mediator)
+        public RolesController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -23,6 +23,22 @@ namespace SHG.WebApi.Controllers
         public async Task<IActionResult> AddAsync(RoleModel model)
         {
             var cmd = new AddRoleCommand(model.Name);
+
+            var result = await _mediator.Send(cmd);
+
+            if (result)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest("Couldn't create role");
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteAsync(Guid Id)
+        {
+            var cmd = new DeleteRoleCommand(Id);
 
             var result = await _mediator.Send(cmd);
 

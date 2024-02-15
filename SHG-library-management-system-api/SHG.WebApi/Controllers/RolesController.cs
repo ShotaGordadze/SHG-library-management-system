@@ -7,6 +7,7 @@ using SHG.WebApi.Models;
 
 namespace SHG.WebApi.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [ApiController]
     [Route("Controller/Role")]
     public class RolesController : ControllerBase
@@ -18,7 +19,6 @@ namespace SHG.WebApi.Controllers
             _mediator = mediator;
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> AddAsync(RoleModel model)
         {
@@ -34,7 +34,6 @@ namespace SHG.WebApi.Controllers
             return BadRequest("Couldn't create role");
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task<IActionResult> DeleteAsync(Guid Id)
         {

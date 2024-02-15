@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using SHG.Infrastructure;
 using SHG.Infrastructure.Database.Entities;
+using SHG.Infrastructure.Repositories;
 
 namespace SHG.Application.Commands.AuthCommands;
 
@@ -10,10 +11,12 @@ public record SignUpCommand(string Email, string Password) : IRequest<User?>;
 public class SignUpCommandHandler : IRequestHandler<SignUpCommand, User?>
 {
     private readonly UserManager<User> _userManager;
+    private readonly IStudentRepository _studentRepository;
 
-    public SignUpCommandHandler(UserManager<User> userManager)
+    public SignUpCommandHandler(UserManager<User> userManager, IStudentRepository studentRepository)
     {
         _userManager = userManager;
+        _studentRepository = studentRepository;
     }
 
     public async Task<User?> Handle(SignUpCommand request, CancellationToken cancellationToken)

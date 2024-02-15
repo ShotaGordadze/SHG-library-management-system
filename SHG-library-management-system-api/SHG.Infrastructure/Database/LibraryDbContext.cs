@@ -52,10 +52,9 @@ public class LibraryDbContext : IdentityDbContext<User,Role,Guid>
                   .WithMany(e => e.Books)
                   .UsingEntity(j => j.ToTable("BookCategory"));
 
-        var studentEntity = modelBuilder.Entity<Student>();
+        var studentEntity = modelBuilder.Entity<User>();
 
-        studentEntity.ToTable("Students")
-                     .HasKey(e => e.Id);
+
 
         studentEntity.HasMany(e => e.Books)
                      .WithMany(e => e.Students)
@@ -74,5 +73,4 @@ public class LibraryDbContext : IdentityDbContext<User,Role,Guid>
     public DbSet<Author> Authors { get; set; }
     public DbSet<Book> Books { get; set; }
     public DbSet<Category> Categories { get; set; }
-    public DbSet<Student> Students { get; set; }
 }

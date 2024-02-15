@@ -12,8 +12,6 @@ public record StudentUpdateNameModel(string Name);
 
 public record StudentUpdateLastnameModel(string Lastname);
 
-public record BookModel(string Name, string Email);
-
 public record CategoryModel(string Name, string? Description);
 
 public record SignUpModel(string Email, string Password);
@@ -21,3 +19,5 @@ public record SignUpModel(string Email, string Password);
 public record SignInModel(string Email, string Password);
 
 public record RoleModel(string Name);
+
+public record BookModel(string Title, int AuthorId);

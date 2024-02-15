@@ -4,6 +4,7 @@ using SHG.WebApi.Models;
 using SHG.Application.Commands.StudentCommands;
 using SHG.Application.Queries;
 using SHG.Application.Queries.StudentQueries;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SHG.Api.Controllers;
 
@@ -18,6 +19,7 @@ public class StudentsController : ControllerBase
         _mediator = mediator;
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> AddAsync([FromBody] StudentModel model)
     {
@@ -25,7 +27,7 @@ public class StudentsController : ControllerBase
 
         return Ok(result);
     }
-
+    [Authorize]
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetAsync([FromRoute] int id)
     {
@@ -33,7 +35,8 @@ public class StudentsController : ControllerBase
 
         return Ok(result);
     }
-    //sus
+
+    [Authorize]
     [HttpGet("{id:int}/details")]
     public async Task<IActionResult> GetDetailsAsync([FromRoute] int id)
     {
@@ -42,6 +45,7 @@ public class StudentsController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id:int}/name")]
     public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromBody] StudentUpdateNameModel model)
     {
@@ -50,6 +54,7 @@ public class StudentsController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)
     {

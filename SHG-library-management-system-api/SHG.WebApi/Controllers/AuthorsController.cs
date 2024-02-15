@@ -6,7 +6,7 @@ using SHG.Application.Commands.AuthorCommands;
 using SHG.Application.Queries.AuthorQueries;
 
 namespace SHG.Api.Controllers;
-[Authorize]
+
 [ApiController]
 [Route("[Controller]")]
 public class AuthorsController : ControllerBase
@@ -18,6 +18,7 @@ public class AuthorsController : ControllerBase
         _mediator = mediator;
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> AddAsync([FromBody] AuthorModel model)
     {
@@ -25,7 +26,8 @@ public class AuthorsController : ControllerBase
 
         return Ok(result);
     }
-    //Add AuthorDetails request
+
+    //Add AuthorDetails endpoint
     [AllowAnonymous]
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetAsync([FromRoute] int id)
@@ -35,6 +37,8 @@ public class AuthorsController : ControllerBase
         return Ok(result);
     }
 
+    // ToDo: edit this to update authors name and lastname at the same time
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id:int}/name")]
     public async Task<IActionResult> UpdateNameAsync(int id, AuthorUpdateNameModel model)
     {
@@ -43,6 +47,7 @@ public class AuthorsController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id:int}/lastname")]
     public async Task<IActionResult> UpdateLastnameAsync(int id, AuthorUpdateLastnameModel model)
     {
@@ -51,6 +56,7 @@ public class AuthorsController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {

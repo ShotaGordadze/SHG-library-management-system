@@ -40,7 +40,7 @@ public class UpdateBookTitleCommandHandler : IRequestHandler<UpdateBookTitleComm
         return new BookDto
         {
             Title = book.Title,
-            Author = book.Author,
+            Author = book.Author.Name + " " + book.Author.Lastname,
             Description = book.Description
         };
     }

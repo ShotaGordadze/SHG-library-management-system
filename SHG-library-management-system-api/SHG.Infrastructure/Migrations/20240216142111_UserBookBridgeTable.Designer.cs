@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SHG.Infrastructure.Database;
@@ -11,9 +12,11 @@ using SHG.Infrastructure.Database;
 namespace SHG.Infrastructure.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    partial class LibraryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240216142111_UserBookBridgeTable")]
+    partial class UserBookBridgeTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,17 +256,13 @@ namespace SHG.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("image");
 
-                    b.Property<DateTime?>("IssueEndDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("issue_end_date");
-
-                    b.Property<DateTime?>("IssueStartDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("issue_start_date");
-
                     b.Property<DateTime?>("LastChangeDate")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("last_change_date");
+
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("integer")
+                        .HasColumnName("student_id");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -275,6 +274,9 @@ namespace SHG.Infrastructure.Migrations
 
                     b.HasIndex("AuthorId")
                         .HasDatabaseName("ix_books_author_id");
+
+                    b.HasIndex("StudentId")
+                        .HasDatabaseName("ix_books_student_id");
 
                     b.ToTable("Books", (string)null);
                 });
@@ -343,6 +345,44 @@ namespace SHG.Infrastructure.Migrations
                     b.ToTable("Roles", "identity");
                 });
 
+            modelBuilder.Entity("SHG.Infrastructure.Database.Entities.Student", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("create_date");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("email");
+
+                    b.Property<DateTime?>("LastChangeDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_change_date");
+
+                    b.Property<string>("Lastname")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("lastname");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id")
+                        .HasName("pk_students");
+
+                    b.ToTable("students", (string)null);
+                });
+
             modelBuilder.Entity("SHG.Infrastructure.Database.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -359,10 +399,6 @@ namespace SHG.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("concurrency_stamp");
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("create_date");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
@@ -371,10 +407,6 @@ namespace SHG.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean")
                         .HasColumnName("email_confirmed");
-
-                    b.Property<DateTime?>("LastChangeDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("last_change_date");
 
                     b.Property<string>("Lastname")
                         .IsRequired()
@@ -542,10 +574,20 @@ namespace SHG.Infrastructure.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_books_authors_author_id");
 
+                    b.HasOne("SHG.Infrastructure.Database.Entities.Student", null)
+                        .WithMany("Books")
+                        .HasForeignKey("StudentId")
+                        .HasConstraintName("fk_books_students_student_id");
+
                     b.Navigation("Author");
                 });
 
             modelBuilder.Entity("SHG.Infrastructure.Database.Entities.Author", b =>
+                {
+                    b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("SHG.Infrastructure.Database.Entities.Student", b =>
                 {
                     b.Navigation("Books");
                 });

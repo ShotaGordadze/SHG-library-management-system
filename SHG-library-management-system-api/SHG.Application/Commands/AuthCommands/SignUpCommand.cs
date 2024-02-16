@@ -1,22 +1,18 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using SHG.Infrastructure;
 using SHG.Infrastructure.Database.Entities;
-using SHG.Infrastructure.Repositories;
 
 namespace SHG.Application.Commands.AuthCommands;
 
-public record SignUpCommand(string Email, string Password) : IRequest<User?>;
+public record SignUpCommand(string Name, string Lastname, string Email, string Password) : IRequest<User?>;
 
 public class SignUpCommandHandler : IRequestHandler<SignUpCommand, User?>
 {
     private readonly UserManager<User> _userManager;
-    private readonly IStudentRepository _studentRepository;
 
-    public SignUpCommandHandler(UserManager<User> userManager, IStudentRepository studentRepository)
+    public SignUpCommandHandler(UserManager<User> userManager)
     {
         _userManager = userManager;
-        _studentRepository = studentRepository;
     }
 
     public async Task<User?> Handle(SignUpCommand request, CancellationToken cancellationToken)
@@ -28,6 +24,8 @@ public class SignUpCommandHandler : IRequestHandler<SignUpCommand, User?>
 
         var idpUserResult = await _userManager.CreateAsync(new User
         {
+            Name = request.Name,
+            Lastname = request.Lastname,
             UserName = request.Email,
             Email = request.Email,
         }, request.Password);

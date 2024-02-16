@@ -20,9 +20,9 @@ public class AuthController : ControllerBase
     [HttpPost("SignUp")]
     public async Task<IActionResult> SignUpAsync(SignUpModel model)
     {
-        var cmd = new SignUpCommand(model.Email, model.Password);
-
+        var cmd = new SignUpCommand(model.Name, model.Lastname, model.Email, model.Password);
         var user = await _mediator.Send(cmd);
+
         if (user != null)
         {
             return Ok(user);

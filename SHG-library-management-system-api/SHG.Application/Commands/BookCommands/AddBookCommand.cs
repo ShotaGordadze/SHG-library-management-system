@@ -7,7 +7,7 @@ using SHG.Infrastructure.Repositories;
 
 namespace SHG.Application.Commands.BookCommands;
 
-public record AddBookCommand(string Title,string Description,string Image, int AuthorId) : IRequest<BookDto?>;
+public record AddBookCommand(string Title, string Description, string Image, int AuthorId) : IRequest<BookDto?>;
 
 public class AddBookCommandHandler : IRequestHandler<AddBookCommand, BookDto?>
 {

@@ -1,34 +1,33 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Identity;
 using SHG.Application.Dtos;
 using SHG.Infrastructure;
+using SHG.Infrastructure.Database.Entities;
 using SHG.Infrastructure.Repositories;
 
 namespace SHG.Application.Commands.StudentCommands;
 
-public record DeleteStudentCommand(int StudentId) : IRequest<int>;
+public record DeleteStudentCommand(Guid StudentId) : IRequest<int>;
 
 public class DeleteStudentCommandHandler : IRequestHandler<DeleteStudentCommand, int>
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IStudentRepository _studentRepository;
+    private readonly UserManager<User> _userManager;
 
-    public DeleteStudentCommandHandler(IUnitOfWork unitOfWork, IStudentRepository studentRepository)
+    public DeleteStudentCommandHandler(UserManager<User> userManager)
     {
-        _unitOfWork = unitOfWork;
-        _studentRepository = studentRepository;
+        _userManager = userManager;
     }
 
     public async Task<int> Handle(DeleteStudentCommand request, CancellationToken cancellationToken)
     {
-        var student = await _studentRepository.Find(request.StudentId);
+        var student = await _userManager.FindByIdAsync(request.StudentId.ToString());
 
         if (student == null)
         {
             return -1;
         }
 
-        _studentRepository.Delete(student);
-        await _unitOfWork.SaveAsync(cancellationToken);
+        await _userManager.DeleteAsync(student);
 
         return 0;
     }

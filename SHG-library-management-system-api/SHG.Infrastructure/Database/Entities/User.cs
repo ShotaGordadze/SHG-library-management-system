@@ -4,9 +4,13 @@ namespace SHG.Infrastructure.Database.Entities;
 
 public class User : IdentityUser<Guid>
 {
-    //public string Name { get; set; }
+    public string Name { get; set; }
 
-    //public string Lastname { get; set; }
+    public string Lastname { get; set; }
 
-    //public IEnumerable<Book> Books { get; set; } = new List<Book>();
+    public DateTime CreateDate { get; set; }
+
+    public DateTime? LastChangeDate { get; set; }
+
+    public List<Book> Books { get; set; } = new List<Book>();
 }

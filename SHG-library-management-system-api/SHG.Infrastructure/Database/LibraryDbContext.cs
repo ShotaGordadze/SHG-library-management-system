@@ -54,11 +54,9 @@ public class LibraryDbContext : IdentityDbContext<User,Role,Guid>
 
         var studentEntity = modelBuilder.Entity<User>();
 
-
-
         studentEntity.HasMany(e => e.Books)
-                     .WithMany(e => e.Students)
-                     .UsingEntity(j => j.ToTable("StudentBook"));
+                     .WithMany(e => e.Users)
+                     .UsingEntity(j => j.ToTable("UserBook"));
 
         var categoryEntity = modelBuilder.Entity<Category>();
 

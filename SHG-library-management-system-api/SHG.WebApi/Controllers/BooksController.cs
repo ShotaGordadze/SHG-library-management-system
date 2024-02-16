@@ -1,6 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using SHG.Application.Commands.BookCommands;
 using SHG.Application.Queries.BookQueries;
@@ -23,7 +21,7 @@ public class BooksController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddAsync([FromBody] BookModel model)
     {
-        var result = await _mediator.Send(new AddBookCommand(model.Title, model.AuthorId));
+        var result = await _mediator.Send(new AddBookCommand(model.Title, model.Description, model.Image, model.AuthorId));
 
         if (result == null)
         {

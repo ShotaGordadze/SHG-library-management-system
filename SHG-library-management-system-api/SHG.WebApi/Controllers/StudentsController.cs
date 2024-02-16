@@ -19,46 +19,62 @@ public class StudentsController : ControllerBase
         _mediator = mediator;
     }
 
-    [Authorize(Roles = "Admin")]
-    [HttpPost]
-    public async Task<IActionResult> AddAsync([FromBody] StudentModel model)
-    {
-        var result = await _mediator.Send(new AddStudentCommand(model.Name, model.Email));
+    //[Authorize(Roles = "Admin")]
+    //[HttpPost]
+    //public async Task<IActionResult> AddAsync([FromBody] StudentModel model)
+    //{
+    //    var result = await _mediator.Send(new AddStudentCommand(model.Name, model.Email));
 
-        return Ok(result);
-    }
-    [Authorize]
-    [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetAsync([FromRoute] int id)
+    //    return Ok(result);
+    //}
+
+    //[Authorize]
+    [HttpGet("{id:Guid}")]
+    public async Task<IActionResult> GetAsync([FromRoute] Guid id)
     {
         var result = await _mediator.Send(new GetStudentQuery(id));
 
+        if (result == null)
+        {
+            return NotFound($"Could not find the student with ID: {id}");
+        }
+
         return Ok(result);
     }
 
     [Authorize]
-    [HttpGet("{id:int}/details")]
-    public async Task<IActionResult> GetDetailsAsync([FromRoute] int id)
+    [HttpGet("{id:Guid}/details")]
+    public async Task<IActionResult> GetDetailsAsync([FromRoute] Guid id)
     {
         var result = await _mediator.Send(new GetStudentDetailsQuery(id));
 
+        if (result == null)
+        {
+            return NotFound($"Could not find the student with ID: {id}");
+        }
+
         return Ok(result);
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpPut("{id:int}/name")]
+    [HttpPut("{id:Guid}/name")]
     public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromBody] StudentUpdateNameModel model)
     {
-        var result = await _mediator.Send(new UpdateStudentNameCommand(id, model.Name));
+        var result = await _mediator.Send(new UpdateStudentNameCommand(id, model.Name, model.Lastname));
 
         return Ok(result);
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpDelete("{id:int}")]
-    public async Task<IActionResult> DeleteAsync([FromRoute] int id)
+    [HttpDelete("{id:Guid}")]
+    public async Task<IActionResult> DeleteAsync([FromRoute] Guid id)
     {
         var result = await _mediator.Send(new DeleteStudentCommand(id));
+
+        if (result == -1)
+        {
+            return NotFound($"Could not find the student with ID: {id}");
+        }
 
         return Ok(result);
     }

@@ -31,7 +31,7 @@ public static class DIExtensions
         services.AddScoped<IAuthorRepository, AuthorRepository>();
         services.AddScoped<IBookRepository, BookRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
-        services.AddScoped<IStudentRepository, StudentRepository>();
+        //services.AddScoped<IStudentRepository, StudentRepository>();
 
         return services;
     }

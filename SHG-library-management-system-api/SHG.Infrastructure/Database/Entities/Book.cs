@@ -15,7 +15,11 @@ public class Book : Entity
 
     public int AuthorId { get; set; }
 
+    public DateTime? IssueStartDate { get; set; } = null;
+
+    public DateTime? IssueEndDate { get; set; } = null;
+
     public IEnumerable<Category> Categories { get; set; } = new List<Category>();
 
-    public IEnumerable<IdentityUser> Students { get; set; } = new List<IdentityUser>();
+    public IEnumerable<User> Users { get; set; } = new List<User>();
 }

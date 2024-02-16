@@ -1,39 +1,41 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Identity;
 using SHG.Application.Dtos;
 using SHG.Infrastructure;
+using SHG.Infrastructure.Database.Entities;
 using SHG.Infrastructure.Repositories;
 
 namespace SHG.Application.Commands.StudentCommands;
 
-public record UpdateStudentNameCommand(int StudentId, string StudentName) : IRequest<StudentDto>;
+public record UpdateStudentNameCommand(int StudentId, string StudentName, string StudentLastname) : IRequest<StudentDto?>;
 
-public class UpdateStudentNameCommandHandler : IRequestHandler<UpdateStudentNameCommand, StudentDto>
+public class UpdateStudentNameCommandHandler : IRequestHandler<UpdateStudentNameCommand, StudentDto?>
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IStudentRepository _studentRepository;
+    private readonly UserManager<User> _userManager;
 
-    public UpdateStudentNameCommandHandler(IUnitOfWork unitOfWork, IStudentRepository studentRepository)
+    public UpdateStudentNameCommandHandler(UserManager<User> userManager)
     {
-        _unitOfWork = unitOfWork;
-        _studentRepository = studentRepository;
+        _userManager = userManager;
     }
 
-    public async Task<StudentDto> Handle(UpdateStudentNameCommand request, CancellationToken cancellationToken)
+    public async Task<StudentDto?> Handle(UpdateStudentNameCommand request, CancellationToken cancellationToken)
     {
-        var student = await _studentRepository.Find(request.StudentId);
+        var student = await _userManager.FindByIdAsync(request.StudentId.ToString());
 
         if (student == null)
         {
-            throw new ArgumentException(nameof(student));
+            return null;
         }
 
         student.Name = request.StudentName;
+        student.Lastname = request.StudentLastname;
 
-        await _unitOfWork.SaveAsync(cancellationToken);
+        //Need extension method for updating student name and lastname
 
         return new StudentDto
         {
             Name = request.StudentName,
+            Lastname = request.StudentLastname,
             Email = student.Email,
             Books = student.Books,
         };

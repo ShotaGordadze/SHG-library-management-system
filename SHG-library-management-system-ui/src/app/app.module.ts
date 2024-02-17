@@ -13,8 +13,8 @@ import { RegisterComponent } from './register/register.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { BookCardComponent } from './book-card/book-card.component';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
-import { EndpointService } from './endpoint.service';
 import { HttpClientModule } from '@angular/common/http';
+import { authService } from './auth.service';
 
 
 @NgModule({
@@ -27,7 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     RegisterComponent,
     RegisterPageComponent,
     BookCardComponent,
-    DashboardPageComponent,
+    DashboardPageComponent
     
   ],
   imports: [
@@ -37,7 +37,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [
-    EndpointService, // Service provided here
+    authService, // Service provided here
     provideClientHydration()
   ],
   bootstrap: [AppComponent],

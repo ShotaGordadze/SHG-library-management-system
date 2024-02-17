@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormsModule, FormControl, FormGroup } from '@angular/forms';
-import { EndpointService } from '../endpoint.service';
+import { authService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +9,7 @@ import { EndpointService } from '../endpoint.service';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-  constructor(private endpointService: EndpointService){
+  constructor(private authService: authService){
 
   }
 
@@ -52,7 +52,7 @@ export class RegisterComponent {
       const {email, password} = this.registerForm.value;
       const jsonObject = { email, password };
       const jsonString = JSON.stringify(jsonObject);
-      this.endpointService.signUp(jsonString).subscribe(
+      this.authService.signUp(jsonString).subscribe(
         response => {
           console.log('Response from signUp:', response);
         },

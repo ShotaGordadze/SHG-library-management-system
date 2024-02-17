@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class EndpointService {
+export class authService {
 
   constructor(private http: HttpClient) { 
     
@@ -19,10 +19,10 @@ export class EndpointService {
     // Set the content type header
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    // Specify the API endpoint URL
+    // Specify the API auth URL
     const apiUrl = `https://localhost:7093/Auth/SignUp`;
 
-    // Make a POST request to the API endpoint with the JSON string in the request body and headers
+    // Make a POST request to the API auth with the JSON string in the request body and headers
     return this.http.post(apiUrl, body, { headers: headers });
   }
 

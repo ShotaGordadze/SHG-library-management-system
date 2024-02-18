@@ -1,0 +1,29 @@
+<div class="form-container">
+    <div class="header">ADD BOOK</div>
+
+    <form [formGroup]="bookForm" (ngSubmit)="submit()">
+
+        <div class="input">
+            <label>ENTER BOOK NAME</label>
+            <input type="text" formControlName="name">
+        </div>
+        <div class="input">
+            <label>ENTER BOOK CATEGORY</label>
+            <input type="text" formControlName="subject">
+        </div>
+        <div class="input">
+            <label>ENTER AUTHOR NAME</label>
+            <input type="text" formControlName="author">
+        </div>
+
+        <div class="img-input">
+            <label class="pointer" for="imgInput"> CLICK HERE TO CHOOSE IMAGE<img
+                    src="https://www.svgrepo.com/show/170952/add-button.svg" class="add-img">
+            </label>
+            <input id="imgInput" type="file" formControlName="image" style="display: none" accept="image/*"
+                (change)="onImgSelected($event)">
+        </div>
+
+        <button type="submit">ADD</button>
+    </form>
+</div>

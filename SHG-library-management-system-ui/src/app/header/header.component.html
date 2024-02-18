@@ -3,10 +3,24 @@
         <img src="..\..\assets\images\logo.png">
     </div>
     <div class="labels-container">
-        <div class="labels">
-            <a routerLink="/login">USER LOGIN</a>
-            <a routerLink="/register">USER SIGNUP</a>
-            <a href="">ADMIN LOGIN</a>
+        <div *ngIf="loggedOut()" class="loggedOut-labels">
+            <a routerLink="">HOME</a>
+            <a routerLink="/login">LOGIN</a>
+            <a routerLink="/register">SIGNUP</a>
+        </div>
+        <div *ngIf="!this.loggedOut() && isAdmin()" class="admin-labels">
+            <a routerLink="">DASHBOARD</a>
+            <a routerLink="">CATEGORIES</a>
+            <a routerLink="">AUTHORS</a>
+            <a routerLink="">BOOKS</a>
+            <a routerLink="">ISSUE BOOKS</a>
+            <a routerLink="">REG STUDENTS</a>
+            <a routerLink="">CHANGE PASSWORD</a>
+        </div>
+        <div *ngIf="!this.loggedOut() && !isAdmin()" class="user-labels">
+            <a routerLink="">HOME</a>
+            <a routerLink="/login">LOGIN</a>
+            <a routerLink="/register">SIGNUP</a>
         </div>
     </div>
     

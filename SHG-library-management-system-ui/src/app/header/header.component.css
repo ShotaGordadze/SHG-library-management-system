@@ -17,16 +17,30 @@ img{
 
 .labels-container{
     background-color:rgb(244, 242, 242);
-
+    padding-right: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
-.labels{
-    width: 350px;
+.loggedOut-labels{
+    width: 250px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-left: 950px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+
+.admin-labels{
+    width: 1000px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
     padding-top: 20px;
     padding-bottom: 20px;
 
